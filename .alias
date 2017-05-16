@@ -3,18 +3,27 @@ alias ls="ls -lFG"
 alias dir="ls"
 alias du="du -h"
 alias more=less
-alias via="vi ~/.alias"
+alias va="vi ~/.alias"
+alias sa="source ~/.alias"
+alias vbrc="vi ~/.bashrc"
+alias sbrc="source ~/.bashrc"
+alias su="sudo"
+alias c="clear"
+alias scmd="history|grep"
+
+# For netstat
+alias whoson="netstat -vanp tcp|grep"
 
 # Make new dir and cd into it
 function mkd () { mkdir "$1" && cd "$1"; }
-
 
 # Make cm, mv and rm require confirmation.
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
-alias su="sudo"
+# For brew
+alias bi="brew install"
 
 # For git
 alias gcm="git commit -m"
@@ -30,6 +39,8 @@ alias gco="git checkout"
 alias gd="git diff"
 alias gl="git log"
 alias grH="git reset HEAD"
+# Checks out a WIP branch from origin
+gcowip () { gco -b $1 origin/$1; }
 
 # Make `g` behave like `git status` with no args, or `git` with args
 g () {
@@ -44,6 +55,9 @@ g () {
 
 # For npm
 function npmreset () { rm -rf node_modules/ && npm install; }
+
+# For yarn
+function yarnreset () { rm -rf node_modules/ && yarn install; }
 
 # For bundle
 alias bi="bundle install"
