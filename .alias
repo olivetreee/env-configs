@@ -11,8 +11,9 @@ alias su="sudo"
 alias c="clear"
 alias scmd="history|grep"
 
-# For netstat
-alias whoson="netstat -vanp tcp|grep"
+# For tcp ports
+function whoson () { lsof -i:$1; }
+function byebye () { kill -9 $1; }
 
 # Make new dir and cd into it
 function mkd () { mkdir "$1" && cd "$1"; }
@@ -26,22 +27,6 @@ alias rm="rm -i"
 alias bi="brew install"
 
 # For git
-alias gcm="git commit -m"
-alias gc="git commit"
-alias gp="git push"
-alias gpgm="git push github master"
-alias gphm="git push heroku master"
-alias gs="git status"
-alias gaa="git add -A"
-alias ga="git add"
-alias gb="git branch"
-alias gco="git checkout"
-alias gd="git diff"
-alias gl="git log"
-alias grH="git reset HEAD"
-# Checks out a WIP branch from origin
-gcowip () { gco -b $1 origin/$1; }
-
 # Make `g` behave like `git status` with no args, or `git` with args
 g () {
   if [ $# -eq 0 ]
@@ -53,23 +38,56 @@ g () {
 }
 #__git_complete g _git
 
+alias gcm="git commit -m"
+alias gc="git commit"
+alias gp="git push"
+alias gpu="git pull"
+alias gpgm="git push github master"
+alias gphm="git push heroku master"
+alias gs="git status"
+alias gaa="git add -A"
+alias ga="git add"
+alias gap="git add --patch"
+alias gb="git branch"
+alias gco="git checkout"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gl="git log"
+alias glg="git log --graph --stat"
+alias gld="git log --graph --stat -p"
+alias grH="git reset HEAD"
+alias gcp="git cherry-pick"
+# Deletes local and remote branches
+function gdb () { gb -d "$1" && gp origin -d "$1"; }
+function gDb () { gb -D "$1" && gp origin -d "$1"; }
+function gup () { git fetch origin && git merge origin/"$1"; }
+# Opens a "Open PR" view against latest release branch
+function pr () { open "SOME_URL_GOES_HERE/$(basename `pwd`)/compare/$(gb | grep release | tail -1 | sed -e 's/^[[:space:]]*//')...$(git rev-parse --abbrev-ref HEAD)?expand=1"; }
+
 # For npm
 function npmreset () { rm -rf node_modules/ && npm install; }
 
 # For yarn
-function yarnreset () { rm -rf node_modules/ && yarn install; }
+function yarnreset () { echo 'Deleting node_modules...' && rm -rf node_modules/ && yarn install && yarn build:clean; }
+alias yi="yarn install"
+alias ydd="yarn dev:debug"
+alias yir="yi && ydd"
+alias yrr="yarnreset && ydd"
+alias links="ls -1 node_modules/ | grep '@$'"
+function yua () {
+  for link in $(ls -1F node_modules/ | grep '@$'); do
+    echo "unlinking ${link%?}..."
+    yarn unlink ${link%?}
+    echo ""
+  done
+  yarn install --check-files
+}
+alias ybw="yarn build:watch"
+alias ydd="yarn dev:debug"
+alias ytw="yarn test:watch"
 
-# For bundle
-alias bi="bundle install"
-alias be="bundle exec"
-alias ber="bundle exec rspec"
+# Other stuff
+function chkver () { while true; do yarn info $(basename `pwd`) versions | tail -n 3 && echo && echo "Looking for v $1" && sleep 3; done; }
 
-# For rails
-alias rgm="rails g model"
-alias rgc="rails g controller"
-
-# For Angular
-alias ngghd="ng github-pages:deploy"
-
-# For blog
-alias new-blog="sh jekyll_new_post.sh"
+# For JWT
+decodejwt () { echo -n "$1" | base64 -D | jq .id; }
