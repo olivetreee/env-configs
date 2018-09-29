@@ -57,6 +57,10 @@ alias glg="git log --graph --stat"
 alias gld="git log --graph --stat -p"
 alias grH="git reset HEAD"
 alias gcp="git cherry-pick"
+function gf () { gco -b feature/"$1" && gp -u origin feature/"$1"; }
+function gcor() {
+  gco $(gb | grep release | tail -1);
+}
 # Deletes local and remote branches
 function gdb () { gb -d "$1" && gp origin -d "$1"; }
 function gDb () { gb -D "$1" && gp origin -d "$1"; }
