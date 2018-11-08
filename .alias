@@ -105,7 +105,7 @@ alias yi="yarn install"
 alias ydd="yarn dev:debug"
 alias yir="yi && ydd"
 alias yrr="yarnreset && ydd"
-alias links="ls -1 node_modules/ | grep '@$'"
+alias yll="ls -1 node_modules/ | grep '@$'"
 function yua () {
   for link in $(ls -1F node_modules/ | grep '@$'); do
     echo "unlinking ${link%?}..."
