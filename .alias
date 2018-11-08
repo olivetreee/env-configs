@@ -56,6 +56,7 @@ alias gl="git log"
 alias glg="git log --graph --stat"
 alias gld="git log --graph --stat -p"
 alias grH="git reset HEAD"
+function grw () { git reset HEAD~"$1"; }
 alias gcp="git cherry-pick"
 function gf () { gco -b feature/"$1" && gp -u origin feature/"$1"; }
 function gcor() {
@@ -65,8 +66,35 @@ function gcor() {
 function gdb () { gb -d "$1" && gp origin -d "$1"; }
 function gDb () { gb -D "$1" && gp origin -d "$1"; }
 function gup () { git fetch origin && git merge origin/"$1"; }
+function grb () { git rebase origin/"$1"; }
 # Opens a "Open PR" view against latest release branch
-function pr () { open "SOME_URL_GOES_HERE/$(basename `pwd`)/compare/$(gb | grep release | tail -1 | sed -e 's/^[[:space:]]*//')...$(git rev-parse --abbrev-ref HEAD)?expand=1"; }
+function pr () { gp && open "SOME_URL_GOES_HERE/$(basename `pwd`)/compare/$(gb | grep release | tail -1 | sed -e 's/^[[:space:]]*//')...$(git rev-parse --abbrev-ref HEAD)?expand=1"; }
+
+# Lists branches with indexes and checkouts the branch on the selected index
+gcon () {
+  # git branch won't work for iteration purposes
+  local BRANCHES=`git for-each-ref --format='%(refname)' refs/heads/`;
+  local IDX=0;
+  for BRANCH in $BRANCHES
+  do
+    let "IDX++";
+    # Removes refs/heads/ from start of line
+    echo $IDX - ${BRANCH#refs/heads/};
+  done
+  echo;
+  echo "Enter branch number";
+  read LINE_NUM;
+  while [ $LINE_NUM -gt $IDX ]
+  do
+    echo;
+    echo "Invalid input. Please select a valid number."
+    read LINE_NUM;
+  done;
+  local SELECTED_BRANCH=$(git for-each-ref --format='%(refname)' refs/heads/ | sed -n "$LINE_NUM"p);
+  gco ${SELECTED_BRANCH#refs/heads/};
+  echo;
+}
+
 
 # For npm
 function npmreset () { rm -rf node_modules/ && npm install; }
@@ -89,9 +117,11 @@ function yua () {
 alias ybw="yarn build:watch"
 alias ydd="yarn dev:debug"
 alias ytw="yarn test:watch"
+alias yuar="yua && ydd"
 
 # Other stuff
 function chkver () { while true; do yarn info $(basename `pwd`) versions | tail -n 3 && echo && echo "Looking for v $1" && sleep 3; done; }
 
 # For JWT
 decodejwt () { echo -n "$1" | base64 -D | jq .id; }
+
