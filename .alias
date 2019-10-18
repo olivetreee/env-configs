@@ -68,6 +68,7 @@ function gcor() {
 function gdb () { gb -d "$1" && gp origin -d "$1"; }
 function gDb () { gb -D "$1" && gp origin -d "$1"; }
 function gup () { git fetch origin && git merge origin/"$1"; }
+function gupr () { gup $(gb | grep release | tail -1); }
 function grb () { git rebase origin/"$1"; }
 # Opens a "Open PR" view against latest release branch
 function pr () { gp && open "SOME_URL_GOES_HERE/$(basename `pwd`)/compare/$(gb | grep release | tail -1 | sed -e 's/^[[:space:]]*//')...$(git rev-parse --abbrev-ref HEAD)?expand=1"; }
@@ -123,6 +124,7 @@ alias yuar="yua && ydd"
 
 # Other stuff
 function chkver () { while true; do yarn info $(basename `pwd`) versions | tail -n 3 && echo && echo "Looking for v $1" && sleep 3; done; }
+alias dv="deactivate"
 
 # For JWT
 decodejwt () { echo -n "$1" | base64 -D | jq .id; }
