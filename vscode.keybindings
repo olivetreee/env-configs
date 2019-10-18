@@ -1,0 +1,175 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+	{
+		"key": "cmd+shift+l",
+		"command": "editor.action.insertSnippet"
+	},
+	{
+		"key": "alt+cmd+right",
+		"command": "cursorWordPartRight",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "shift+alt+cmd+right",
+		"command": "cursorWordPartRightSelect",
+		"when": "textInputFocus" },
+	{
+		"key": "alt+cmd+left",
+		"command": "cursorWordPartStartLeft",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "shift+alt+cmd+left",
+		"command": "cursorWordPartStartLeftSelect",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "alt+cmd+backspace",
+		"command": "deleteWordPartLeft",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{
+		"key": "shift+alt+cmd+backspace",
+		"command": "deleteWordPartRight",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	// Toggle between terminal and editor focus
+	{
+		"key": "ctrl+`",
+		"command": "workbench.action.terminal.focus"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "workbench.action.focusActiveEditorGroup",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "workbench.action.terminal.focusNextPane",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "workbench.action.terminal.focusPreviousPane",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+shift+`",
+		"command": "-workbench.action.terminal.new"
+	},
+	{
+		"key": "shift+cmd+c",
+		"command": "copyRelativeFilePath"
+	},
+	// the following 4 remove keybinding to be used on debugger actions
+	{
+		"key": "shift+cmd+.",
+		"command": "-breadcrumbs.focusAndSelect"
+	},
+	{
+		"key": "shift+cmd+.",
+		"command": "-editor.action.inPlaceReplace.down",
+	},
+	{
+		"key": "cmd+.",
+		"command": "-editor.action.quickFix"
+	},
+	{
+		"key": "cmd+.",
+		"command": "-settings.action.editFocusedSetting",
+	},
+	{
+		"key": "shift+cmd+.",
+		"command": "workbench.action.debug.continue",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "f5",
+		"command": "-workbench.action.debug.continue",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "shift+cmd+.",
+		"command": "workbench.action.debug.start",
+		"when": "!inDebugMode"
+	},
+	{
+		"key": "f5",
+		"command": "-workbench.action.debug.start",
+		"when": "!inDebugMode"
+	},
+	{
+		"key": "cmd+.",
+		"command": "workbench.action.debug.stepInto",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "f11",
+		"command": "-workbench.action.debug.stepInto",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "cmd+;",
+		"command": "workbench.action.debug.stepOver",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "f10",
+		"command": "-workbench.action.debug.stepOver",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "cmd+ctrl+p",
+		"command": "quokka.createJavaScriptFile"
+	},
+	{
+		"key": "cmd+ctrl+r",
+		"command": "editor.action.insertSnippet",
+		"when": "editorTextFocus",
+		"args": {
+			"snippet": "import React from 'react';\nimport PropTypes from 'prop-types';\n"
+		}
+	},
+	{
+		"key": "cmd+ctrl+l",
+		"command": "editor.action.insertSnippet",
+		"when": "editorTextFocus",
+		"args": {
+			"snippet": "import _ from 'lodash/fp';"
+		}
+	},
+	{
+		"key": "cmd+ctrl+i",
+		"command": "editor.action.insertSnippet",
+		"when": "editorTextFocus",
+		"args": {
+			"snippet": "import { Map, List, Set, fromJS } from 'immutable';"
+		}
+	},
+	{
+		"key": "cmd+ctrl+t",
+		"command": "editor.action.insertSnippet",
+		"when": "editorTextFocus",
+		"args": {
+			"snippet": "import { expect } from 'chai';\nimport { shallow } from 'enzyme';"
+		}
+	},
+	{
+		"key": "ctrl+cmd+c",
+		"command": "workbench.action.terminal.openNativeConsole",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "shift+cmd+c",
+		"command": "-workbench.action.terminal.openNativeConsole",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "ctrl+shift+`",
+		"command": "workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal"
+	}
+]
