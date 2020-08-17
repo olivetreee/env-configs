@@ -113,6 +113,11 @@ gcon () {
   echo;
 }
 
+# For GitHub
+function remote () {
+  open "https://SOME_URL_HERE/$(basename `pwd`)";
+}
+
 
 # For npm
 function npmreset () { rm -rf node_modules/ && npm install; }
