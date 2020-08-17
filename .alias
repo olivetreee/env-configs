@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # General stuff
 alias ls="ls -lFG"
 alias dir="ls"
@@ -46,7 +48,20 @@ alias gpu="git pull"
 alias gpgm="git push github master"
 alias gphm="git push heroku master"
 alias gs="git status"
-alias gaa="git add -A"
+alias gd="git diff"
+function anydotonly () {
+  local DIFF_RESULT=`gd | grep -E 'describe\.only|it\.only'`
+  if [ -z "$DIFF_RESULT" ]
+  then
+    return 0
+  else
+    echo "Please get rid of all '.only':"
+    gd | grep -E 'describe.only|it.only'
+    return 1
+  fi
+}
+alias gaa="anydotonly && git add -A"
+alias gac="gaa & gcm"
 alias gap="git add --patch"
 alias ga="git add"
 alias gb="git branch"
