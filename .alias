@@ -147,5 +147,7 @@ function chkver () { while true; do yarn info $(basename `pwd`) versions | tail 
 alias dv="deactivate"
 
 # For JWT
-decodejwt () { echo -n "$1" | base64 -D | jq .id; }
+decodejwt () { printf "\n" && echo -n "$1" | base64 -D && printf "\n\n"; }
 
+# For Docker
+function imgExplorer () { docker run -it $1 sh; }
