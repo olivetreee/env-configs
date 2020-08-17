@@ -44,12 +44,12 @@
 		"when": "terminalFocus"
 	},
 	{
-		"key": "ctrl+shift+down",
+		"key": "alt+cmd+]",
 		"command": "workbench.action.terminal.focusNextPane",
 		"when": "terminalFocus"
 	},
 	{
-		"key": "ctrl+shift+up",
+		"key": "alt+cmd+[",
 		"command": "workbench.action.terminal.focusPreviousPane",
 		"when": "terminalFocus"
 	},
@@ -171,5 +171,89 @@
 	{
 		"key": "ctrl+`",
 		"command": "-workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "shift+f12",
+		"command": "editor.action.revealDefinition",
+		"when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+	},
+	{
+		"key": "f12",
+		"command": "-editor.action.revealDefinition",
+		"when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+	},
+	{
+		"key": "f12",
+		"command": "editor.action.goToReferences",
+		"when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "shift+f12",
+		"command": "-editor.action.goToReferences",
+		"when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "ctrl+tab",
+		"command": "workbench.action.focusRightGroup",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "cmd+k cmd+right",
+		"command": "-workbench.action.focusRightGroup"
+	},
+	{
+		"key": "ctrl+shift+tab",
+		"command": "workbench.action.focusLeftGroup",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "cmd+k cmd+left",
+		"command": "-workbench.action.focusLeftGroup"
+	},
+	{
+		"key": "alt+cmd+[",
+		"command": "-editor.fold",
+		"when": "editorTextFocus && foldingEnabled"
+	},
+	{
+		"key": "alt+cmd+]",
+		"command": "-editor.unfold",
+		"when": "editorTextFocus && foldingEnabled"
+	},
+	{
+		"key": "alt+cmd+right",
+		"command": "-workbench.action.terminal.focusNextPane",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "alt+cmd+left",
+		"command": "-workbench.action.terminal.focusPreviousPane",
+		"when": "terminalFocus"
 	}
+	// {
+	// 	"key": "ctrl+tab",
+	// 	"command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+	// },
+	// {
+	// 	"key": "ctrl+shift+tab",
+	// 	"command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+	// },
+	// {
+	// 	"key": "ctrl+tab",
+	// 	"command": "workbench.action.quickOpenNavigateNextInEditorPicker"
+	// },
+	// {
+	// 	"key": "ctrl+tab",
+	// 	"command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
+	// 	"when": "inEditorsPicker && inQuickOpen"
+	// },
+	// {
+	// 	"key": "ctrl+shift+tab",
+	// 	"command": "workbench.action.quickOpenNavigatePreviousInEditorPicker"
+	// },
+	// {
+	// 	"key": "ctrl+shift+tab",
+	// 	"command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
+	// 	"when": "inEditorsPicker && inQuickOpen"
+	// }
 ]
