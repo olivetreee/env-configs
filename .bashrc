@@ -10,8 +10,10 @@ parse_git_branch() {
 }
 
 # Format prompt color
-GREEN='\[\033[32m\]'
-BLUE='\[\033[1;34m\]'
+# \[ and \] are the start and end of non-printable char sequences
+GREEN='\[\e[32m\]'
+BLUE='\[\e[1;34m\]'
+RED='\[\e[0;31m\]'
 RESET='\[\e[0m\]'
 export PS1="\u@$GREEN{\W}$BLUE\$(parse_git_branch)$RESET$ "
 
