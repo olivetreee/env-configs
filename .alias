@@ -55,7 +55,7 @@ function anydotonly () {
   then
     return 0
   else
-    echo "Please get rid of all '.only':"
+    echo -e "${RED}Please get rid of all '.only':${RESET}"
     gd | grep -E 'describe.only|it.only'
     return 1
   fi
