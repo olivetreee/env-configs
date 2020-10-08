@@ -143,7 +143,7 @@ alias ytw="yarn test:watch"
 alias yuar="yua && ydd"
 
 # Other stuff
-function chkver () { while true; do yarn info $(basename `pwd`) versions | tail -n 3 && echo && echo "Looking for v $1" && sleep 3; done; }
+function chkver () { while true; do echo "Looking for v $1" && echo && yarn info $(basename `pwd`) versions | tail -n 4 | head -n 2 && echo && sleep 3; done; }
 alias dv="deactivate"
 
 # For JWT
