@@ -123,7 +123,7 @@ function remote () {
 function npmreset () { rm -rf node_modules/ && npm install; }
 
 # For yarn
-function yarnreset () { echo 'Deleting node_modules...' && rm -rf node_modules/ && yarn install && yarn build:clean; }
+function dracarys () { echo 'Deleting node_modules...' && rm -rf node_modules/ && yarn install && yarn build:clean; }
 alias yi="yarn install"
 alias ydd="yarn dev:debug"
 alias yir="yi && ydd"
