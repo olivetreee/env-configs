@@ -11,8 +11,8 @@ alias vbrc="vi ~/.bashrc"
 alias sbrc="source ~/.bashrc"
 alias su="sudo"
 alias c="clear"
-alias scmd="history|grep"
-alias boom="pkill -9 node"
+alias scmd="history|grep --color -r"
+alias o66="pkill -9 node"
 
 # For ports
 function whoson () { lsof -i:$1; }
