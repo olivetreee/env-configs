@@ -61,13 +61,13 @@ function anydotonly () {
   fi
 }
 alias gaa="anydotonly && git add -A"
-alias gac="gaa & gcm"
+alias gac="gaa && gcm"
 alias gap="git add --patch"
 alias ga="git add"
 alias gb="git branch"
 alias gco="git checkout"
 alias gcod="git checkout develop"
-alias gcom="git checkout master"
+alias gcom="git checkout main"
 alias gdc="git diff --cached"
 alias gl="git log"
 alias glg="git log --graph --stat"
