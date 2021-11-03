@@ -147,7 +147,7 @@ function chkver () { while true; do echo "Looking for v $1" && echo && yarn info
 alias dv="deactivate"
 
 # For JWT
-decodejwt () { printf "\n" && echo -n "$1" | base64 -D && printf "\n\n"; }
+# decodejwt () { printf "\n" && echo -n "$1" | base64 -D && printf "\n\n"; }
 
 # For Docker
 function imgExplorer () { docker run -it $1 sh; }
