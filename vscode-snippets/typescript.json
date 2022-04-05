@@ -1,0 +1,109 @@
+{
+	"Print var to console": {
+		"prefix": "clog",
+		"body": [
+				"console.log('%c 💻 $1', 'background: #0984e3; padding: 10px 20px; border-radius: 5px', $1);"
+		],
+		"description": "Log output to console"
+	},
+	"Print table to console": {
+		"prefix": "table",
+		"body": [
+				"console.table('%c 🧮 $1', 'background: #00b894; padding: 10px 20px; border-radius: 5px', $1);"
+		],
+		"description": "Log output to console"
+	},
+	"Print @@@ to console": {
+		"prefix": "@@@",
+		"body": [
+			"console.log('%c 🌀 @@@$1', 'background: #8e44ad; padding: 10px 20px; border-radius: 5px');"
+		],
+		"description": "Log output to console"
+	},
+	"Print simple @@@ to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('@@@$1', $1);"
+		],
+		"description": "Log output to console"
+	},
+	"Place beforeEach block": {
+		"prefix": "beforeEach",
+		"body": [
+		"beforeEach(() => {",
+			"  $1",
+		"});"
+		]
+	},
+	"Place afterEach block": {
+		"prefix": "afterEach",
+		"body": [
+		"afterEach(() => {",
+			"  $1",
+		"});"
+		]
+	},
+	"Place describe block": {
+		"prefix": "describe",
+		"body": [
+		"describe.only('$1', () => {",
+			"  $2",
+		"});"
+		]
+	},
+	"Place it block": {
+		"prefix": "should",
+		"body": [
+		"it('should $1', () => {",
+			"  $2",
+			"  expect();",
+		"});"
+		]
+	},
+	"import {} from ...": {
+		"prefix": "import",
+		"body": [
+			"import { $1 } from '$2';"
+		]
+	},
+	"Initialize test": {
+		"prefix": "test",
+		"body": [
+			"import React from 'react';",
+			"import { expect } from 'chai';",
+			"import { shallow } from 'enzyme';",
+			"import sinon from 'sinon';",
+			"",
+			"import { $1 } from './$1';",
+			"",
+			"describe.only('$1', () => {",
+				"  let wrapper;",
+				"",
+				"  beforeEach(() => {",
+					"    wrapper = shallow(<$1 />);",
+				"  });",
+			"",
+			"  it('should $2', () => {",
+				"    $3",
+				"    expect();",
+			"  });",
+			"});",
+			""
+		]
+	}
+/*
+	// Place your snippets for JavaScript here. Each snippet is defined under a snippet name and has a prefix, body and
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+	// same ids are connected.
+	// Example:
+	"Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	}
+*/
+}
