@@ -74,6 +74,7 @@ alias glg="git log --graph --stat"
 alias gld="git log --graph --stat -p"
 alias grH="git reset HEAD"
 function grw () { git reset HEAD~"$1"; }
+function grv () { git revert HEAD~"$1"..; }
 alias gcp="git cherry-pick"
 function gf () { gco -b feature/"$1" && gp -u origin feature/"$1"; }
 function gcor() {
