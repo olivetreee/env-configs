@@ -1,4 +1,4 @@
-# INSTRAUCTIONS
+# INSTRUCTIONS
 # 1. Add ~/.alias (and ~/.alias-zsh as needed)
 # 2. Install Powerlevel10k: https://github.com/romkatv/powerlevel10k#homebrew
 
