@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Global variables
+# __EO_SELECTED_BRANCH: used by getbranch to store which branch has been selected by its index. Later used by gcon and gdbn
+
 # General stuff
 alias ls="ls -lFG"
 alias dir="ls"
@@ -9,10 +12,13 @@ alias va="vi ~/.alias"
 alias sa="source ~/.alias"
 alias vbrc="vi ~/.bashrc"
 alias sbrc="source ~/.bashrc"
+alias vzrc="vi ~/.zshrc"
+alias szrc="source ~/.zshrc"
 alias su="sudo"
 alias c="clear"
 alias scmd="history|grep --color"
 alias o66="pkill -9 node"
+alias history="history 1"
 
 # For ports
 function whoson () { lsof -i:$1; }
@@ -43,7 +49,10 @@ g () {
 
 alias gcm="git commit -m"
 alias gc="git commit"
+alias gcaj="git commit --amend --no-verify"
 alias gp="git push"
+alias gpp="HUSKY=0 gp --no-verify"
+alias gpj="HUSKY=0 gp --no-verify --force"
 alias gpu="git pull"
 alias gpgm="git push github master"
 alias gphm="git push heroku master"
@@ -81,16 +90,16 @@ function gcor() {
   gco $(gb | grep release | tail -1);
 }
 # Deletes local and remote branches
-function gdb () { gb -d "$1" && gp origin -d "$1"; }
-function gDb () { gb -D "$1" && gp origin -d "$1"; }
+function gdb () { gb -d "$1" && gpp origin -d "$1"; }
+function gDb () { gb -D "$1" && gpp origin -d "$1"; }
 function gup () { git fetch origin && git merge origin/"$1"; }
 function gupr () { gup $(gb | grep release | tail -1); }
 function grb () { git rebase origin/"$1"; }
 # Opens a "Open PR" view against latest release branch
 function pr () { gp && open "SOME_URL_GOES_HERE/$(basename `pwd`)/compare/$(gb | grep release | tail -1 | sed -e 's/^[[:space:]]*//')...$(git rev-parse --abbrev-ref HEAD)?expand=1"; }
 
-# Lists branches with indexes and checkouts the branch on the selected index
-gcon () {
+# Lists branches with indexes and allow the user to select one
+function getbranch () {
   # git branch won't work for iteration purposes
   local BRANCHES=`git for-each-ref --format='%(refname)' refs/heads/`;
   local IDX=0;
@@ -98,7 +107,7 @@ gcon () {
   do
     let "IDX++";
     # Removes refs/heads/ from start of line
-    echo ${BRANCH#refs/heads/} - $IDX;
+    echo "${BRANCH#refs/heads/} - ${IDX}";
   done
   echo;
   echo "Enter branch number";
@@ -109,8 +118,28 @@ gcon () {
     echo "Invalid input. Please select a valid number."
     read LINE_NUM;
   done;
-  local SELECTED_BRANCH=$(git for-each-ref --format='%(refname)' refs/heads/ | sed -n "$LINE_NUM"p);
-  gco ${SELECTED_BRANCH#refs/heads/};
+  __EO_SELECTED_BRANCH=$(git for-each-ref --format='%(refname)' refs/heads/ | sed -n "$LINE_NUM"p);
+}
+
+gcon () {
+  getbranch;
+  echo "Checking out ${__EO_SELECTED_BRANCH}...";
+  gco ${__EO_SELECTED_BRANCH#refs/heads/};
+  echo;
+}
+
+gdbn () {
+  getbranch;
+  echo "Deleting ${__EO_SELECTED_BRANCH}...";
+  gdb ${__EO_SELECTED_BRANCH#refs/heads/};
+  echo;
+}
+
+
+gDbn () {
+  getbranch;
+  echo "⚠️ WARNING: Force deleting ${__EO_SELECTED_BRANCH}...";
+  gDb ${__EO_SELECTED_BRANCH#refs/heads/};
   echo;
 }
 
@@ -155,3 +184,6 @@ function imgExplorer () { docker run -it $1 sh; }
 
 # For AWS
 alias vaws="vi ~/.aws/credentials"
+
+# For IntelliJ IDEA
+function idea () { open -na "IntelliJ IDEA.app" --args $1; }
