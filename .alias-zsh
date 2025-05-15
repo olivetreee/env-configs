@@ -1,0 +1,26 @@
+# These are zsh overwirtes of bash alias, specified in ~/.alias
+
+# Lists branches with indexes and checkout the branch on the selected index
+gcon () {
+  # git branch won't work for iteration purposes
+  local BRANCHES=`git for-each-ref --format='%(refname)' refs/heads/`;
+  local IDX=0;
+  for BRANCH in $BRANCHES
+  do
+    (( IDX+=1 ));
+    # Removes refs/heads/ from start of line
+    echo "${BRANCH#refs/heads/} - ${IDX}";
+  done
+  echo;
+  echo "Enter branch number";
+  read LINE_NUM;
+  while [ $LINE_NUM -gt $IDX ]
+  do
+    echo;
+    echo "Invalid input. Please select a valid number."
+    read LINE_NUM;
+  done;
+  local SELECTED_BRANCH=$(git for-each-ref --format='%(refname)' refs/heads/ | sed -n "$LINE_NUM"p);
+  gco ${SELECTED_BRANCH#refs/heads/};
+  echo;
+}
